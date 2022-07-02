@@ -117,6 +117,7 @@ def Movie(request):
     global page
 
     id=data.get("id")
+    data = request.POST
     action = data.get("Page_num")
     if data.get("number") != None:
         page = data.get("number")
