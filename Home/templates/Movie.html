@@ -1,0 +1,118 @@
+{% extends 'outerpart.html' %}
+
+{% block innerpart %}
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary">{{MM.title}}</h2>
+        </div>
+        <div class="row tm-mb-90">            
+            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+                    <iframe width=100% height=100% src="https://www.youtube.com/embed/{{Trailer.key}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>    
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                {% if user.is_authenticated %}
+                <form method="post" >
+                    {% csrf_token %}
+                <button class="{{Fav}}" name="Fav">
+                    <i class="fa fa-star"></i>
+                    <span class="icon">favorite</span>
+                  </button>
+                  <input visibility: hidden type="hidden" name="id" value="{{ MM.id}}">
+                  <input visibility: hidden type="hidden" name="Fav_button" value="True">
+                </form>
+                {% endif %}
+                <div class="tm-bg-gray tm-video-details">
+                    <div>
+                        <h3 class="tm-text-gray-dark mb-3">Genres : </h3>
+                        {% for genre in MM.genres %}
+                        <a href="#" class="tm-text-primary mr-4 mb-2 d-inline-block">{{genre.name}}</a>
+                        {% endfor %}
+                    </div>
+                        <h3 class="tm-text-gray-dark mb-3">Overview : </h3>
+                        <p class="mb-4"> 
+                            {{MM.overview}}
+                        </p>
+                    <div class="mb-4 d-flex flex-wrap">
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Release Date: </span><span class="tm-text-primary"> {{MM.release_date}} </span>
+                        </div>
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Rate : </span><span class="tm-text-primary">{{MM.vote_average}}</span>
+                        </div>
+                        <div>
+                            <span class="tm-text-gray-dark">Language: </span><span class="tm-text-primary">{{MM.original_language}} </span>
+                        </div>
+                        <div>
+                            <span class="tm-text-gray-dark">Duration: </span><span class="tm-text-primary">{{MM.runtime}} min</span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="tm-text-gray-dark mb-3">Production Companies : </h3>
+                        {% for Co in MM.production_companies %}
+                        <p>{{Co.name}}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center mb-5">
+                        <a href="{{MM.homepage}}" class="btn btn-primary tm-btn-big"> The Movie's Homepage</a>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid tm-container-content tm-mt-60">
+            <div class="row mb-4">
+                <h2 class="col-6 tm-text-primary">
+                    Similar Movies                                                               
+                </h2>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <form method="post" class="tm-text-primary">
+                            {% csrf_token %}
+                            Page <input type="number" value="{{page}}" name="number" size="1" class="tm-input-paging tm-text-primary" min="1" max="200"> of 200
+                        </form>           
+            
+            
+                    </div>
+                </div>
+            
+                <div class="row tm-mb-90 tm-gallery">
+                    {% for movie in List %}
+                    {% if movie.poster_path is not None %}
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5" >
+                        <form method="get" action="../Movie/" id="{{movie.title}}">
+                        <figure class="effect-ming tm-video-item" >
+                                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" alt="Image" class="img-fluid" >
+                                <input visibility: hidden type="text" name="id" value="{{ movie.id}}">
+                            <figcaption class="d-flex align-items-center justify-content-center">
+                                <h2 id="{{movie.id}}">{{ movie.title}}</h2>
+                            </figcaption>                   
+                        </figure>
+                        <div class="d-flex justify-content-between tm-text-gray">
+                            <span class="tm-text-gray-light">{{ movie.release_date}}</span>
+                            <span>{{ movie.vote_average}}</span>
+                        </div>
+                        </form> 
+                    </div>
+                    {% endif %}
+       <script>
+            document.getElementById("{{movie.id}}").addEventListener("click", function () {document.getElementById("{{movie.title}}").submit();});
+        </script>
+                    
+    {% endfor %}
+            
+            
+            
+</div> <!-- row -->
+<div class="row tm-mb-90">
+    <form method="post">
+        {% csrf_token %}
+    <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+        <input visibility: hidden type="hidden" name="id" value="{{ MM.id}}">
+        <button type="submit" class="btn btn-primary tm-btn-next" name="Page_num" value="Previous">Previous Page</button>
+        <div class="tm-paging d-flex"></div>
+        <button type="submit" class="btn btn-primary tm-btn-next" name="Page_num" value="Next">Next Page</button>
+        
+    </div>            
+</div>
+</div> <!-- container-fluid, tm-container-content -->
+
+    {% endblock %} 

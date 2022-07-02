@@ -1,0 +1,132 @@
+{% extends 'outerpart.html' %}
+
+{% block innerpart %}
+
+
+    <div class="container-fluid tm-mt-60">
+        <div class="row tm-mb-50">
+            <div class="col-lg-4 col-12 mb-5">
+                <h2 class="tm-text-primary mb-5">Contact Page</h2>
+                <form  action="../Contacting/" id="contact-form" action="" method="POST" class="tm-contact-form mx-auto">
+                    {% csrf_token %}<ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="contact-select" name="inquiry">
+                            <option value="-">Subject</option>
+                            <option value="Feature Requets">Feature Requets</option>
+                            <option value="Bug Reports">Bug Reports</option>
+                            <option value="Questions">Questions</option>
+                            <option value="Reviews">Reviews</option>
+                            <option value="Praise">Praise</option>
+                            <option value="Support">Support</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Dontion">Dontion</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Message" required=></textarea>
+                    </div>
+
+                    <div class="form-group tm-text-right">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>                
+            </div>
+            <div class="col-lg-4 col-12 mb-5">
+                <div class="tm-address-col">
+                    <h2 class="tm-text-primary mb-5">Our Address</h2>
+                    <p class="tm-mb-50">Dear website visitors we currently have no location but we are a group of students and we are availabe at working times at the institue address feel free to visit us.</p>
+                    <p class="tm-mb-50">We will be super excited to receive from you. Don't hesitate to contact us we would be happy to get your notes, reviews and support.</p>
+                    <address class="tm-text-gray tm-mb-50">
+                        380, Bd Brahim Roudani, Casablanca<br>
+                        217, Bd Bir Anazarane, Casablanca
+                    </address>
+                    <ul class="tm-contacts">
+                        <li>
+                            <a href="#" class="tm-text-gray">
+                                <i class="fas fa-envelope"></i>
+                                Email: SMM-info@emsi.ma
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="tm-text-gray">
+                                <i class="fas fa-phone"></i>
+                                Tel: 061-020-0340
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="tm-text-gray">
+                                <i class="fas fa-globe"></i>
+                                URL: www.SMM.ma
+                            </a>
+                        </li>
+                    </ul>
+                </div>                
+            </div>
+            <div class="col-lg-4 col-12">
+                <h2 class="tm-text-primary mb-5">Our Location</h2>
+                <!-- Map -->
+                <div class="mapouter mb-4">
+                    <div class="gmap-canvas">
+                        <iframe width="100%" height="520" id="gmap-canvas"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.917468614!2d-7.635854784410737!3d33.58149204983682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d3a6393fc621%3A0x8b61fdb8a5a91679!2sEMSI%20ROUDANI!5e0!3m2!1sen!2sma!4v1656258036077!5m2!1sen!2sma"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    </div>
+                </div>               
+            </div>
+        </div>
+        {% load static %}
+        <div class="row tm-mb-74 tm-people-row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+                <img src="{% static 'img/Ilyass.jpeg'%}" alt="Image" class="mb-4 img-fluid" >
+                <h2 class="tm-text-primary mb-4">Ilyass Mekouar</h2>
+                <h3 class="tm-text-secondary h5 mb-4">Front-end Developer</h3>
+                <p class="mb-4">
+                    In charge of all the graphical user interfaces on our website, and maintaining the best Accessibility, Performance, Speedy development in order to give the best experience to our website visitors.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+                <img src="{% static 'img/Hamza.jpeg'%}" alt="Image" class="mb-4 img-fluid" >
+                <h2 class="tm-text-primary mb-4">Hamza Moussali</h2>
+                <h3 class="tm-text-secondary h5 mb-4">Back-end Developer</h3>
+                <p class="mb-4">
+                    Focusing on website architecture, scripting and writing code that communicates between the website's database and the user's browser by ensuring data Consistency and Integrity in a solid performance.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+                <img src="{% static 'img/Zakaria.jpg'%}" alt="Image" class="mb-4 img-fluid" >
+                <h2 class="tm-text-primary mb-4">Zakaria Karkouri</h2>
+                <h3 class="tm-text-secondary h5 mb-4">Chief Executive Officer</h3>
+                <p class="mb-4">
+                    the CEO responsible of of being an active decision-maker on working strategy and other key policy issues, leader, manager and executor. Tasked with implementing the goals, targets and strategic objectives.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            
+        </div>
+
+        {% endblock %} 

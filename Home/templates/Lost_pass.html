@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style2.css'%}">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/Clapper.ico'%}">
+    <!--
+    
+-->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="..">
+                <i class="fas fa-film mr-2"></i>
+                Suggest Me a Movie
+            </a>
+        </div>
+    </nav>
+
+
+<section class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                <header>Reset Password</header>
+            </div>
+            <div class="form-link">
+                <span>Forgotten your password ? Enter your eamil address below, and we'll eamil you for setting a new one</span>
+            </div>
+            <form action="../Return_password/" method="post">
+            {% csrf_token %}
+            <div class="field input-field">
+                <input type="email" placeholder="Email" class="input" name="email">
+            </div>
+            <div class="field button-field">
+                <input type="submit" value="Send">
+            </div>
+            </from>
+        </div>
+</section>
+</body>
+</html>
