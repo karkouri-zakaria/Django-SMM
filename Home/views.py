@@ -146,7 +146,7 @@ def Movie(request):
             video = Trailer
             break
 
-    List = requests.get("https://api.themoviedb.org/3/movie/"+str(id)+"/similar?api_key=6fe2c9251ad61629064389bb48013886",params=param).json()['results']
+    List = requests.get("https://api.themoviedb.org/3/movie/"+str(id)+"/similar?api_key=6fe2c9251ad61629064389bb48013886",params=param).json()['results'];shuffle(List)
     context = { 
         'MM': Main_Movie,
         'Trailer': video,
@@ -249,7 +249,7 @@ def Suggestions(request):
     shuffle(Movies)
     template = loader.get_template('Grid.html')
     context = { 
-        'Movies': Movies,
+        'Movies': Movies[:20],
         'page' : page,
         'active4':'active', 
     }
