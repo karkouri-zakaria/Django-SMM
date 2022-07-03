@@ -175,10 +175,10 @@ def MyList(request,Movies=[]):
 def Suggestions(request,Movies=[]):
     from random import shuffle,randint
     List=Movies_List.objects.all().values()
-    param={'page':randint(1,30)}
     for dic in List:
         if dic["username_id"]==request.user.id:
-            Similars_List=requests.get("https://api.themoviedb.org/3/movie/"+str(dic['movie'])+"/similar?api_key=6fe2c9251ad61629064389bb48013886&sort_by=vote_average.desc",params=param).json()['results']
+            param={'page':randint(1,30)}
+            Similars_List=requests.get("https://api.themoviedb.org/3/movie/"+str(dic['movie'])+"/similar?api_key=6fe2c9251ad61629064389bb48013886",params=param).json()['results']
             for movie in Similars_List:
                 if float(movie["vote_average"])>=7:
                     Movies.append(movie)
