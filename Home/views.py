@@ -71,9 +71,9 @@ def Search_page(request):
 def Movie(request):
     from random import shuffle
     data = request.GET
-    List=Movies_List.objects.all().values()
+    print(request.POST)
     if bool(request.POST.get('Fav_button', False)):
-        if not any([True for dic in List  if dic['movie']==int(data['id']) and dic['username_id'] == request.user.id]):
+        if not any([True for dic in Movies_List.objects.all().values()  if dic['movie']==int(data['id']) and dic['username_id'] == request.user.id]):
             Movies_List(movie=data['id'],username_id=request.user.id).save()
         else:
             Movies_List.objects.get(movie=int(data['id']),username_id=request.user.id).delete()
@@ -83,7 +83,7 @@ def Movie(request):
     param={'page':str(page)}
     template = loader.get_template('Movie.html')
 
-    Fav ="favorited" if id is not None and any([True for dic in List  if dic['movie']==int(id) and dic['username_id'] == request.user.id]) else ""
+    Fav ="favorited" if any([True for dic in Movies_List.objects.all().values()  if dic['movie']==int(id) and dic['username_id'] == request.user.id]) else ""
 
     Main_Movie = requests.get("https://api.themoviedb.org/3/movie/"+str(id)+"?api_key=6fe2c9251ad61629064389bb48013886").json()
     Trailers = requests.get("https://api.themoviedb.org/3/movie/"+str(id)+"/videos?api_key=6fe2c9251ad61629064389bb48013886").json()['results']
