@@ -70,7 +70,6 @@
     
 <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="{% static 'img/Fest.jpg'%}">
     <form action="../searching" method="get" class="d-flex tm-search-form">
-        {% csrf_token %}
         <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" name="search">
         <button class="btn btn-outline-success tm-search-btn" type="submit">
             <i class="fas fa-search"></i>
